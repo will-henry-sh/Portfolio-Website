@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Env/secrets
+.env
+.env.*
+
+# Logs and temp files
+*.log
+*.tmp
+*.temp
+
+# Dependency/build artifacts (if tooling is added later)
+node_modules/
+vendor/
+dist/
+build/
+coverage/

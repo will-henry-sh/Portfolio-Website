@@ -1,0 +1,37 @@
+# macOS
+.DS_Store
+
+# Editor
+.idea/
+*.swp
+*.swo
+*~
+
+# Local shell/home artifacts in this workspace
+.alias
+.bash_profile
+.bashrc
+.cshrc
+.kshrc
+.zshrc
+.cache/
+.php/
+.ssh/
+.wp-cli/
+Maildir/
+logs/
+.claude/
+
+# Secrets
+willhenrycreative.com/wp-config.php
+
+# WordPress generated content
+willhenrycreative.com/wp-content/cache/
+willhenrycreative.com/wp-content/uploads/
+willhenrycreative.com/wp-content/upgrade/
+willhenrycreative.com/wp-content/backups/
+
+# Build/vendor noise (plugins/themes that vendor dependencies)
+**/node_modules/
+**/vendor/
+
