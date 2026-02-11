@@ -13,3 +13,66 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: twentytwentyfour
 Tags: one-column, custom-colors, custom-menu, custom-logo, editor-style, featured-images, full-site-editing, block-patterns, rtl-language-support, sticky-post, threaded-comments, translation-ready, wide-blocks, block-styles, style-variations, accessibility-ready, blog, portfolio, news
 */
+
+/* Dark mode override */
+:root {
+	--site-bg: #0c1118;
+	--site-surface: #141b24;
+	--site-border: #273447;
+	--site-text: #e5ebf3;
+	--site-muted: #a6b4c7;
+	--site-link: #78b7ff;
+	--site-link-hover: #a7d2ff;
+}
+
+html,
+body,
+.wp-site-blocks {
+	background: var(--site-bg) !important;
+	color: var(--site-text) !important;
+}
+
+.wp-site-blocks a {
+	color: var(--site-link) !important;
+}
+
+.wp-site-blocks a:hover,
+.wp-site-blocks a:focus {
+	color: var(--site-link-hover) !important;
+}
+
+.wp-site-blocks p,
+.wp-site-blocks li,
+.wp-site-blocks blockquote,
+.wp-site-blocks figcaption {
+	color: var(--site-text) !important;
+}
+
+.wp-site-blocks :is(h1, h2, h3, h4, h5, h6) {
+	color: #f5f8fc !important;
+}
+
+.wp-site-blocks :is(input, textarea, select, button) {
+	background: var(--site-surface) !important;
+	border: 1px solid var(--site-border) !important;
+	color: var(--site-text) !important;
+}
+
+.wp-site-blocks .wp-block-button__link {
+	background: #1f64d6 !important;
+	color: #ffffff !important;
+}
+
+.wp-site-blocks .wp-block-button__link:hover {
+	background: #2b77f0 !important;
+}
+
+.wp-site-blocks :is(table, th, td) {
+	border-color: var(--site-border) !important;
+}
+
+.wp-site-blocks pre,
+.wp-site-blocks code {
+	background: #101722 !important;
+	color: #d4deea !important;
+}

@@ -24,14 +24,16 @@ logs/
 
 # Secrets
 willhenrycreative.com/wp-config.php
+sftp.json
+.vscode/sftp.json
 
 # WordPress generated content
 willhenrycreative.com/wp-content/cache/
 willhenrycreative.com/wp-content/uploads/
 willhenrycreative.com/wp-content/upgrade/
 willhenrycreative.com/wp-content/backups/
+*.bak
 
 # Build/vendor noise (plugins/themes that vendor dependencies)
 **/node_modules/
 **/vendor/
-
