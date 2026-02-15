@@ -159,3 +159,139 @@ if ( ! function_exists( 'twentytwentyfive_format_binding' ) ) :
 		}
 	}
 endif;
+
+// Auto-creates core portfolio pages so slug templates resolve without manual admin setup.
+if ( ! function_exists( 'twentytwentyfive_seed_portfolio_pages' ) ) :
+	/**
+	 * Creates required portfolio pages once if they do not already exist.
+	 *
+	 * @since Twenty Twenty-Five 1.0
+	 *
+	 * @return void
+	 */
+	function twentytwentyfive_seed_portfolio_pages() {
+		if ( get_option( 'twentytwentyfive_portfolio_pages_seeded' ) ) {
+			return;
+		}
+
+		$lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+
+		$pages = array(
+			array(
+				'title' => 'SEO',
+				'slug'  => 'seo',
+			),
+			array(
+				'title' => 'Copywriting',
+				'slug'  => 'copywriting',
+			),
+			array(
+				'title' => 'Development',
+				'slug'  => 'development',
+			),
+			array(
+				'title' => 'About',
+				'slug'  => 'about',
+			),
+			array(
+				'title' => 'Contact',
+				'slug'  => 'contact',
+			),
+		);
+
+		foreach ( $pages as $page ) {
+			$existing_page = get_page_by_path( $page['slug'], OBJECT, 'page' );
+
+			if ( $existing_page ) {
+				continue;
+			}
+
+			wp_insert_post(
+				array(
+					'post_type'    => 'page',
+					'post_status'  => 'publish',
+					'post_title'   => $page['title'],
+					'post_name'    => $page['slug'],
+					'post_content' => $lorem,
+				)
+			);
+		}
+
+		update_option( 'twentytwentyfive_portfolio_pages_seeded', 1, false );
+	}
+endif;
+add_action( 'init', 'twentytwentyfive_seed_portfolio_pages', 20 );
+
+// Forces noindex/nofollow on all front-end responses for private pre-launch sites.
+if ( ! function_exists( 'twentytwentyfive_force_noindex' ) ) :
+	/**
+	 * Adds noindex directives via WordPress robots API.
+	 *
+	 * @since Twenty Twenty-Five 1.0
+	 *
+	 * @param array<string, bool> $robots Associative array of robots directives.
+	 * @return array<string, bool>
+	 */
+	function twentytwentyfive_force_noindex( $robots ) {
+		$robots['noindex']   = true;
+		$robots['nofollow']  = true;
+		$robots['noarchive'] = true;
+		$robots['nosnippet'] = true;
+		return $robots;
+	}
+endif;
+add_filter( 'wp_robots', 'twentytwentyfive_force_noindex' );
+
+if ( ! function_exists( 'twentytwentyfive_send_noindex_header' ) ) :
+	/**
+	 * Sends noindex directives in HTTP headers for crawlers that respect X-Robots-Tag.
+	 *
+	 * @since Twenty Twenty-Five 1.0
+	 *
+	 * @return void
+	 */
+	function twentytwentyfive_send_noindex_header() {
+		if ( is_admin() || headers_sent() ) {
+			return;
+		}
+
+		header( 'X-Robots-Tag: noindex, nofollow, noarchive, nosnippet', true );
+	}
+endif;
+add_action( 'send_headers', 'twentytwentyfive_send_noindex_header' );
+
+// Adds baseline security headers and disables XML-RPC for reduced attack surface.
+if ( ! function_exists( 'twentytwentyfive_security_headers' ) ) :
+	/**
+	 * Sends baseline security headers.
+	 *
+	 * @since Twenty Twenty-Five 1.0
+	 *
+	 * @return void
+	 */
+	function twentytwentyfive_security_headers() {
+		if ( is_admin() || headers_sent() ) {
+			return;
+		}
+
+		header( 'X-Frame-Options: SAMEORIGIN', true );
+		header( 'X-Content-Type-Options: nosniff', true );
+		header( 'Referrer-Policy: strict-origin-when-cross-origin', true );
+		header( 'Permissions-Policy: camera=(), microphone=(), geolocation=()', true );
+	}
+endif;
+add_action( 'send_headers', 'twentytwentyfive_security_headers', 20 );
+
+if ( ! function_exists( 'twentytwentyfive_disable_xmlrpc' ) ) :
+	/**
+	 * Disables XML-RPC endpoint and pingback functionality.
+	 *
+	 * @since Twenty Twenty-Five 1.0
+	 *
+	 * @return bool
+	 */
+	function twentytwentyfive_disable_xmlrpc() {
+		return false;
+	}
+endif;
+add_filter( 'xmlrpc_enabled', 'twentytwentyfive_disable_xmlrpc' );

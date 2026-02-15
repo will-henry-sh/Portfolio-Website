@@ -23,3 +23,29 @@ RewriteRule . /index.php [L]
 </IfModule>
 
 # END WordPress
+
+# BEGIN WHC Security
+# Keep this section outside WordPress markers so updates do not overwrite it.
+
+# Disable directory listings.
+Options -Indexes
+
+# Block direct access to sensitive and backup files.
+<IfModule mod_authz_core.c>
+<FilesMatch "(^\.|composer\.(json|lock)|package(-lock)?\.json|yarn\.lock|pnpm-lock\.yaml|phpunit\.xml(?:\.dist)?|\.env|\.git|\.svn|\.hg|debug\.log|error_log|readme\.html|license\.txt|wp-config\.php|.*\.(?:sql|bak|old|orig|ini|log|sh|swp|dist))$">
+Require all denied
+</FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+<FilesMatch "(^\.|composer\.(json|lock)|package(-lock)?\.json|yarn\.lock|pnpm-lock\.yaml|phpunit\.xml(?:\.dist)?|\.env|\.git|\.svn|\.hg|debug\.log|error_log|readme\.html|license\.txt|wp-config\.php|.*\.(?:sql|bak|old|orig|ini|log|sh|swp|dist))$">
+Order allow,deny
+Deny from all
+</FilesMatch>
+</IfModule>
+
+# Block XML-RPC endpoint.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^xmlrpc\.php$ - [F,L]
+</IfModule>
+# END WHC Security

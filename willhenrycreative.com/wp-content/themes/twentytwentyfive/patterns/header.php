@@ -21,7 +21,13 @@
 			<!-- wp:site-title {"level":0} /-->
 			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"right"}} -->
 			<div class="wp-block-group">
-				<!-- wp:navigation {"overlayBackgroundColor":"base","overlayTextColor":"contrast","layout":{"type":"flex","justifyContent":"right","flexWrap":"wrap"}} /-->
+				<!-- wp:navigation {"overlayBackgroundColor":"base","overlayTextColor":"contrast","layout":{"type":"flex","justifyContent":"right","flexWrap":"wrap"}} -->
+				<!-- wp:navigation-link {"label":"SEO","url":"/seo/","kind":"custom","isTopLevelLink":true} /-->
+				<!-- wp:navigation-link {"label":"Copywriting","url":"/copywriting/","kind":"custom","isTopLevelLink":true} /-->
+				<!-- wp:navigation-link {"label":"Development","url":"/development/","kind":"custom","isTopLevelLink":true} /-->
+				<!-- wp:navigation-link {"label":"About","url":"/about/","kind":"custom","isTopLevelLink":true} /-->
+				<!-- wp:navigation-link {"label":"Contact","url":"/contact/","kind":"custom","isTopLevelLink":true} /-->
+				<!-- /wp:navigation -->
 			</div>
 			<!-- /wp:group -->
 		</div>
