@@ -122,15 +122,17 @@ input[type="submit"]:hover {
 	--whc-accent-2: #93ffc2;
 }
 
-html,
+html {
+	background: #07111f !important;
+	overscroll-behavior-y: none;
+}
+
 body,
 .wp-site-blocks {
-	background:
-		radial-gradient(900px 520px at 78% 12%, rgba(79, 224, 138, 0.14), transparent 62%),
-		radial-gradient(820px 460px at 8% 20%, rgba(60, 120, 220, 0.13), transparent 68%),
-		linear-gradient(180deg, #08111f 0%, #050b16 76%) !important;
+	background: linear-gradient(180deg, #08111f 0%, #050b16 76%) !important;
 	color: var(--whc-text) !important;
 	font-family: "Space Grotesk", "Segoe UI", sans-serif !important;
+	min-height: 100vh;
 }
 
 .wp-site-blocks {
@@ -139,6 +141,10 @@ body,
 
 .wp-site-blocks::before {
 	content: none;
+}
+
+.whc-hero::after {
+	content: none !important;
 }
 
 .wp-site-blocks :is(h1, h2, h3, h4) {
@@ -199,6 +205,15 @@ body,
 	text-decoration-thickness: 1px;
 }
 
+/* Strip WordPress inline margin-top from all main page containers */
+.whc-front-page,
+.whc-writing-page,
+.whc-seo-page,
+.whc-case-study,
+.whc-contact-page {
+	margin-top: 0 !important;
+}
+
 /* Main rhythm */
 .whc-front-page {
 	position: relative;
@@ -206,26 +221,38 @@ body,
 	padding-left: clamp(1rem, 3vw, 2rem);
 	padding-right: clamp(1rem, 3vw, 2rem);
 	display: grid;
-	gap: clamp(1.6rem, 3.2vw, 2.65rem);
+	gap: 0;
+}
+
+/* Zero out WordPress margin-block-start on front-page direct children */
+.whc-front-page > * {
+	margin-block-start: 0 !important;
 }
 
 .whc-hero {
 	position: relative;
-	max-width: 70rem;
-	margin: 0 auto;
+	padding-top: 2.5rem !important;
+	padding-bottom: 2rem !important;
+	padding-left: clamp(1.5rem, 4vw, 3rem);
+	padding-right: clamp(1.5rem, 4vw, 3rem);
 }
 
-.whc-hero::after {
-	content: "";
-	position: absolute;
-	width: min(34vw, 300px);
-	height: min(34vw, 300px);
-	right: 6%;
-	top: 4%;
-	background: radial-gradient(circle, rgba(147, 255, 194, 0.2) 0%, rgba(147, 255, 194, 0.01) 72%);
-	filter: blur(10px);
-	z-index: -1;
+/* Override WordPress constrained inner layout — left-align all hero content */
+.whc-hero > * {
+	max-width: none !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
 }
+
+/* But keep per-element readable widths */
+.whc-hero h1 {
+	max-width: 18ch;
+}
+
+.whc-hero .whc-hero-subhead {
+	max-width: 46ch;
+}
+
 
 .whc-hero > p.has-small-font-size {
 	color: var(--whc-accent-2) !important;
@@ -243,10 +270,74 @@ body,
 	margin-bottom: 0.1rem;
 }
 
+.whc-front-page .whc-hero {
+	text-align: center;
+	padding-bottom: 0.5rem !important;
+}
+
+.whc-front-page .whc-hero > * {
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+.whc-hero-role {
+	font-size: 0.82rem !important;
+	text-transform: uppercase;
+	letter-spacing: 0.15em;
+	color: var(--whc-accent-2) !important;
+	font-weight: 600;
+	margin-top: 0.85rem;
+}
+
+.whc-hero-bio {
+	max-width: 52ch;
+	font-size: clamp(1rem, 1.15vw, 1.1rem) !important;
+	color: var(--whc-text-muted) !important;
+	line-height: 1.65;
+	margin-top: 0.75rem;
+}
+
+.whc-hero-tools {
+	font-size: 0.72rem !important;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	color: var(--whc-text-muted) !important;
+	opacity: 0.7;
+	margin-top: 1.1rem;
+}
+
+.whc-card-count {
+	font-size: 0.7rem !important;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: var(--whc-accent-2) !important;
+	font-weight: 600;
+	margin-bottom: 0.25rem;
+}
+
+/* H2 inside a case card — smaller than the global h2 */
+.whc-case-card h2.wp-block-heading {
+	font-size: clamp(1.2rem, 2vw, 1.55rem) !important;
+	letter-spacing: -0.01em;
+}
+
+.whc-front-contact {
+	padding-left: clamp(1.5rem, 4vw, 3rem) !important;
+	padding-bottom: 2.5rem;
+	max-width: none !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	font-size: 0.95rem !important;
+	color: var(--whc-text-muted) !important;
+}
+
 .whc-feature-stack {
 	display: grid;
 	grid-template-columns: repeat(12, minmax(0, 1fr));
 	gap: clamp(1rem, 2vw, 1.35rem);
+	padding-left: clamp(1.5rem, 4vw, 3rem) !important;
+	padding-right: clamp(1.5rem, 4vw, 3rem) !important;
+	padding-bottom: 0 !important;
 }
 
 .whc-feature-section {
@@ -256,12 +347,39 @@ body,
 	border: 1px solid rgba(85, 126, 170, 0.2);
 	border-radius: 14px;
 	background: linear-gradient(180deg, rgba(12, 21, 35, 0.45), rgba(12, 21, 35, 0.2));
-	grid-column: span 4;
+	grid-column: span 6;
 }
 
 .whc-feature-section > .wp-block-heading {
 	font-size: clamp(1.25rem, 2.2vw, 1.8rem) !important;
 	letter-spacing: -0.01em;
+}
+
+/* Case study body sections — match hero left-padding and constrain reading width */
+.whc-case-study .wp-block-group.alignwide:not(.whc-hero) {
+	padding-left: clamp(1.5rem, 4vw, 3rem);
+	padding-right: clamp(1.5rem, 4vw, 3rem);
+}
+
+.whc-case-study .wp-block-group.alignwide:not(.whc-hero) > * {
+	max-width: none !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+.whc-case-study h2.wp-block-heading {
+	max-width: 100%;
+	margin-top: 1.2rem;
+}
+
+.whc-case-study h3.wp-block-heading {
+	font-size: clamp(1.05rem, 1.5vw, 1.25rem) !important;
+	color: var(--whc-text) !important;
+	margin-top: 1rem;
+}
+
+.whc-case-study p {
+	max-width: 68ch;
 }
 
 /* Cards and CTA bands */
@@ -330,9 +448,11 @@ body,
 
 /* Footer */
 .whc-site-footer {
-	margin-top: clamp(3rem, 7vw, 5rem);
+	margin-top: 2rem;
 	border-top: 1px solid rgba(79, 224, 138, 0.18);
 	background: rgba(5, 10, 19, 0.65);
+	padding-top: 1.5rem !important;
+	padding-bottom: 1.5rem !important;
 }
 
 .whc-site-footer__tagline {
@@ -366,18 +486,183 @@ body,
 		font-size: 0.78rem;
 	}
 
-	.whc-hero::after {
-		width: 220px;
-		height: 220px;
-		right: -8%;
-		top: 8%;
-	}
-
-	.whc-case-card .wp-block-button__link,
+.whc-case-card .wp-block-button__link,
 	.whc-cta-band .wp-block-button__link {
 		width: 100%;
 		text-align: center;
 		padding-top: 0.95rem !important;
 		padding-bottom: 0.95rem !important;
 	}
+}
+
+/* ── Global: fix WordPress blockGap + grid gap conflict ─ */
+
+/* WordPress constrained layout adds margin-block-start per item; zero it out so
+   only our CSS grid gap controls spacing inside .whc-feature-stack */
+.whc-feature-stack > * {
+	margin-block-start: 0 !important;
+}
+
+/* Left-align all direct children of cards, sections, and CTA band.
+   WordPress constrained layout sets max-width + margin:auto on every child —
+   override so content fills its container and sits left. */
+.whc-feature-section > *,
+.whc-case-card > *,
+.whc-cta-band > * {
+	max-width: none !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+/* Readable line-length for body copy inside cards */
+.whc-feature-section > p:not(.has-small-font-size),
+.whc-case-card > p:not(.has-small-font-size),
+.whc-cta-band > p {
+	max-width: 54ch;
+}
+
+/* Writing page: space between card title and description */
+.whc-writing-page .whc-case-card h3.wp-block-heading {
+	margin-bottom: 0.55rem;
+}
+
+/* Writing + SEO + contact page: larger eyebrow label as standalone page title */
+.whc-writing-page .whc-hero > p.has-small-font-size,
+.whc-seo-page .whc-hero > p.has-small-font-size,
+.whc-contact-page .whc-hero > p.has-small-font-size {
+	font-size: clamp(1.4rem, 2.5vw, 2.2rem) !important;
+	letter-spacing: 0.1em;
+}
+
+/* Front page, SEO page, and writing page: heading is now inside the card, so the
+   outer feature-section frame is redundant. Strip it to avoid double borders. */
+.whc-front-page .whc-feature-section,
+.whc-seo-page .whc-feature-section,
+.whc-writing-page .whc-feature-section {
+	background: none;
+	border-color: transparent;
+	padding: 0;
+	gap: 0;
+}
+
+/* Writing + SEO page: equal-height cards — flex column so button always sits at bottom */
+.whc-writing-page .whc-case-card,
+.whc-seo-page .whc-case-card {
+	display: flex !important;
+	flex-direction: column;
+	height: 100%;
+}
+
+.whc-writing-page .whc-case-card .wp-block-buttons,
+.whc-seo-page .whc-case-card .wp-block-buttons {
+	margin-top: auto;
+	padding-top: 0.5rem;
+}
+
+/* Case study body: the outer alignwide group has left-padding already, but
+   the inner content groups are themselves constrained — their children
+   (h2, h3, p) get re-centered. Override one level deeper. */
+.whc-case-study .wp-block-group.alignwide:not(.whc-hero) > .wp-block-group > * {
+	max-width: none !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+/* Footer: strip WordPress centering so nav, tagline, and contact info
+   sit left-aligned at full width, consistent with page padding. */
+.whc-site-footer__inner {
+	padding-left: clamp(1.5rem, 4vw, 3rem);
+	padding-right: clamp(1.5rem, 4vw, 3rem);
+}
+
+.whc-site-footer__inner > * {
+	max-width: none !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+/* ── Contact form ─────────────────────────────────────── */
+.whc-contact-page .whc-hero {
+	padding-top: 1.5rem !important;
+	padding-bottom: 1rem !important;
+}
+
+.whc-contact-page .whc-hero > * {
+	margin-block-start: 0 !important;
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+.whc-contact-page .wp-block-shortcode {
+	max-width: none !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+.whc-contact-form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	width: min(100%, 460px);
+	max-width: 460px !important;
+	margin-left: 0;
+	margin-top: 0.75rem;
+}
+
+.whc-form-field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+}
+
+.whc-form-field label {
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 500;
+	letter-spacing: 0.02em;
+}
+
+.whc-form-field input,
+.whc-form-field textarea {
+	width: 100%;
+	padding: 0.55rem 0.85rem;
+	border: 1px solid rgba(79, 224, 138, 0.25);
+	background: rgba(15, 26, 44, 0.6);
+	color: var(--whc-text);
+	font-family: inherit;
+	font-size: 0.9rem;
+	border-radius: 8px;
+	outline: none;
+	transition: border-color 0.15s ease, background 0.15s ease;
+	box-sizing: border-box;
+}
+
+.whc-form-field textarea {
+	height: 80px !important;
+	min-height: unset;
+	resize: vertical;
+}
+
+.whc-form-field input:focus,
+.whc-form-field textarea:focus {
+	border-color: rgba(79, 224, 138, 0.6);
+	background: rgba(15, 26, 44, 0.9);
+}
+
+.whc-contact-form button[type="submit"] {
+	align-self: flex-start;
+	padding: 0.45rem 1.05rem !important;
+	font-size: 0.85rem !important;
+	border-radius: 6px !important;
+	font-weight: 600 !important;
+}
+
+.whc-form-success {
+	font-size: var(--wp--preset--font-size--medium);
+	padding: 1.5rem 0;
+}
+
+.whc-form-error {
+	color: inherit;
+	opacity: 0.7;
+	margin-bottom: 1rem;
 }

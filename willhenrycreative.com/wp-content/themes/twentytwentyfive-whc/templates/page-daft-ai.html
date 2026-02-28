@@ -1,0 +1,79 @@
+<!-- wp:template-part {"slug":"header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"whc-case-study","style":{"spacing":{"margin":{"top":"var:preset|spacing|60"}}},"layout":{"type":"constrained"}} -->
+<main class="wp-block-group whc-case-study" style="margin-top:var(--wp--preset--spacing--60)">
+
+	<!-- wp:group {"align":"wide","className":"whc-hero","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|40"},"blockGap":"var:preset|spacing|20"}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group alignwide whc-hero" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--40)">
+		<!-- wp:paragraph {"fontSize":"small"} -->
+		<p class="has-small-font-size">CASE STUDY</p>
+		<!-- /wp:paragraph -->
+		<!-- wp:heading {"level":1,"fontSize":"xx-large"} -->
+		<h1 class="wp-block-heading has-xx-large-font-size">Daft.ai — Technical SEO and CMS Architecture</h1>
+		<!-- /wp:heading -->
+		<!-- wp:paragraph {"className":"whc-hero-subhead"} -->
+		<p class="whc-hero-subhead">Technical SEO · Payload CMS · GitHub · Structured Data · Oct 2025 – Jan 2026</p>
+		<!-- /wp:paragraph -->
+	</div>
+	<!-- /wp:group -->
+
+	<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"bottom":"var:preset|spacing|60"},"blockGap":"var:preset|spacing|40"}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group alignwide" style="padding-bottom:var(--wp--preset--spacing--60)">
+
+		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"constrained"}} -->
+		<div class="wp-block-group">
+			<!-- wp:heading {"level":2} -->
+			<h2 class="wp-block-heading">The problem</h2>
+			<!-- /wp:heading -->
+			<!-- wp:paragraph -->
+			<p>Daft.ai is an AI infrastructure company building tools for distributed and multimodal workloads. A Screaming Frog crawl revealed that every blog post URL on the site was blocked by robots.txt — none of their content was eligible to be indexed by Google. Separately, their Search Console property was configured as daft.ai rather than www.daft.ai, skewing performance data and making organic visibility impossible to track accurately.</p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:group -->
+
+		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"constrained"}} -->
+		<div class="wp-block-group">
+			<!-- wp:heading {"level":2} -->
+			<h2 class="wp-block-heading">What I did</h2>
+			<!-- /wp:heading -->
+
+			<!-- wp:heading {"level":3} -->
+			<h3 class="wp-block-heading">Indexing &amp; Search Console</h3>
+			<!-- /wp:heading -->
+			<!-- wp:paragraph -->
+			<p>Fixed the robots.txt configuration to allow crawling of the blog. Posts began indexing within 24–48 hours. Added www.daft.ai as a verified GSC property to establish accurate baseline tracking going forward.</p>
+			<!-- /wp:paragraph -->
+
+			<!-- wp:heading {"level":3} -->
+			<h3 class="wp-block-heading">Schema markup &amp; canonical URLs</h3>
+			<!-- /wp:heading -->
+			<!-- wp:paragraph -->
+			<p>Working directly in GitHub, I implemented missing canonical URLs across blog content and added structured data — Organization, Blog, and BlogPost schema — that was entirely absent from the site. Changes were pushed and verified through Vercel's deployment pipeline.</p>
+			<!-- /wp:paragraph -->
+
+			<!-- wp:heading {"level":3} -->
+			<h3 class="wp-block-heading">CMS architecture</h3>
+			<!-- /wp:heading -->
+			<!-- wp:paragraph -->
+			<p>Inside Payload CMS, I audited the heading architecture and corrected widespread H1 duplication across blog posts. I also evaluated the related posts field, confirmed it was neither rendered nor included in structured data, and implemented it into the JSON-LD Article markup to strengthen crawl depth and entity relationships.</p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:group -->
+
+		<!-- wp:group {"className":"whc-cta-band","style":{"border":{"width":"1px"},"spacing":{"padding":{"top":"var:preset|spacing|30","right":"var:preset|spacing|30","bottom":"var:preset|spacing|30","left":"var:preset|spacing|30"},"blockGap":"var:preset|spacing|15"}},"layout":{"type":"constrained"}} -->
+		<div class="wp-block-group whc-cta-band" style="border-width:1px;padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30)">
+			<!-- wp:buttons -->
+			<div class="wp-block-buttons"><!-- wp:button {"className":"is-style-outline"} -->
+				<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/seo/">← Back to SEO portfolio</a></div>
+				<!-- /wp:button --></div>
+			<!-- /wp:buttons -->
+		</div>
+		<!-- /wp:group -->
+
+	</div>
+	<!-- /wp:group -->
+
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"site-footer"} /-->

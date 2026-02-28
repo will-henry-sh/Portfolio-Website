@@ -37,3 +37,10 @@ willhenrycreative.com/wp-content/backups/
 # Build/vendor noise (plugins/themes that vendor dependencies)
 **/node_modules/
 **/vendor/
+
+# One-time setup scripts (contain DB credentials / config)
+willhenrycreative.com/setup-*.php
+willhenrycreative.com/test-mail.php
+
+# WP-CLI binary
+wp-cli.phar
